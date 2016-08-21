@@ -11,3 +11,13 @@ pTF <- gamlss.dist::pTF
 dTF <- gamlss.dist::dTF
 #' @export
 rTF <- gamlss.dist::rTF
+#' @export
+TF2 <- gamlss.dist::TF2
+#' @export
+qTF2 <- gamlss.dist::qTF2
+#' @export
+pTF2 <- gamlss.dist::pTF2
+#' @export
+dTF2 <- gamlss.dist::dTF2
+#' @export
+rTF2 <- gamlss.dist::rTF2
