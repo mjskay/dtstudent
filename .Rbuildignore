@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^[^/]*\.md$
+^[^/]*\.Rmd$
+^[^/]*\.html$
+^[^/]*\.txt$
+^.*~$
+^\.gitignore$
+^\.git$
+^\.gitattributes$
+^\.travis\.yml$

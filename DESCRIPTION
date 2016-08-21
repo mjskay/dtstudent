@@ -1,0 +1,25 @@
+Package: dtstudent
+Type: Package
+Title: Discrete Truncated Student-t Distribution
+Version: 0.1.0.00001
+Authors@R: c(person("Matthew", "Kay", role = c("aut", "cre"),
+    email = "mjskay@umich.edu"))
+Maintainer: Matthew Kay <mjskay@umich.edu>
+Description: Distribution functions for the discrete truncated
+    Student-t distribution, as well as enhancement to the
+    rethinking package to make it easy to specify regression
+    models using this distribution.
+License: GPL (>= 2)
+Depends:
+    R (>= 3.3)
+Imports:
+    rethinking,
+    gamlss.dist,
+    gamlss.tr,
+    magrittr,
+    dplyr
+BugReports: https://github.com/mjskay/dtstudent/issues/new
+Encoding: UTF-8
+URL: https://github.com/mjskay/dtstudent
+LazyData: TRUE
+RoxygenNote: 5.0.1
