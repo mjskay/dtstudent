@@ -3,16 +3,27 @@
 \name{dtstudentSD}
 \alias{ddtstudentSD}
 \alias{dtstudentSD}
+\alias{pdtstudentSD}
+\alias{qdtstudentSD}
+\alias{rdtstudentSD}
 \title{Discrete Truncated Student-t Distribution, Standard Deviation Parameterization}
 \usage{
 ddtstudentSD(x, nuprime, mu, sigma, width = 1, lower = 0, upper = 100,
   log = FALSE)
+
+pdtstudentSD(q, nuprime, mu, sigma, width = 1, lower = 0, upper = 100,
+  log.p = FALSE, lower.tail = TRUE)
+
+qdtstudentSD(p, nuprime, mu, sigma, width = 1, lower = 0, upper = 100,
+  log.p = FALSE, lower.tail = TRUE)
+
+rdtstudentSD(n, nuprime, mu, sigma, width = 1, lower = 0, upper = 100)
 }
 \arguments{
 \item{x, q}{vector of quantiles.}
 
 \item{nuprime}{\code{degrees of freedom - 2} of underlying Student-t distribution. \code{nuprime > 0},
-and as \code{nu} goes to \code{Inf}, the underlying distribution becomes Normal.}
+and as \code{nuprime} goes to \code{Inf}, the underlying distribution becomes Normal.}
 
 \item{mu}{mode / mean of underlying Student-t distribution.}
 
@@ -26,12 +37,12 @@ and as \code{nu} goes to \code{Inf}, the underlying distribution becomes Normal.
 
 \item{log, log.p}{logical; if \code{TRUE}, probabilities \code{p} are given as \code{log(p)}.}
 
+\item{lower.tail}{logical; if \code{TRUE} (default), probabilities are \emph{P[X ≤ x]} otherwise,
+\emph{P[X > x]}.}
+
 \item{p}{vector of probabilities.}
 
 \item{n}{number of observations.}
-
-\item{lower.tail}{logical; if \code{TRUE} (default), probabilities are \emph{P[X ≤ x]} otherwise,
-\emph{P[X > x]}.}
 }
 \description{
 Discrete truncated Student-t distribution parameterized by standard deviation.
