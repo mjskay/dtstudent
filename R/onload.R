@@ -36,7 +36,7 @@
                 ));",
             num_pars = 6,
             par_names = c("nu","mu","scale","width","lower","upper"),
-            par_bounds = c("<lower=3>","","<lower=0>","<lower=0>","",""),
+            par_bounds = c("<lower=0>","","<lower=0>","<lower=0>","",""),
             par_types = c("real","real","real","real","real","real"),
             out_type = "real",
             par_map = function(k,e,...) {
@@ -49,7 +49,7 @@
                 }
                 nu_name <- as.character( k[[1]] )
                 if ( is.null(constr_list[[nu_name]]) ) {
-                    constr_list[[nu_name]] <- "lower=3"
+                    constr_list[[nu_name]] <- "lower=0"
                     assign( "constraints" , constr_list , envir=e )
                 }
                 scale_name <- as.character( k[[3]] )
@@ -63,7 +63,7 @@
         )
 
     #discrete student t, type 2: standard deviation parameterization
-    rethinking_env$map2stan.templates$DiscreteTruncatedStudentT2 =
+    rethinking_env$map2stan.templates$DiscreteTruncatedStudentTSD =
         modifyList(rethinking_env$map2stan.templates$DiscreteTruncatedStudentT, list(
             name = "DiscreteTruncatedStudentTSD",
             R_name = "ddtstudentSD",
@@ -78,7 +78,7 @@
                 }
                 nuprime_name <- as.character( k[[1]] )
                 if ( is.null(constr_list[[nuprime_name]]) ) {
-                    constr_list[[nuprime_name]] <- "lower=3"
+                    constr_list[[nuprime_name]] <- "lower=0"
                     assign( "constraints" , constr_list , envir=e )
                 }
                 sigma_name <- as.character( k[[3]] )
