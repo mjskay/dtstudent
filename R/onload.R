@@ -68,6 +68,29 @@
             name = "DiscreteTruncatedStudentTSD",
             R_name = "ddtstudentSD",
             par_names = c("nuprime","mu","sigma","width","lower","upper"),
+            stan_code = "target +=
+                //interval censoring: responses were rounded to intervals of size PAR4
+                log_diff_exp(
+                    student_t_lcdf(OUTCOME + PAR4/2.0  | PAR1 + 2, PAR2, sqrt(PAR1/(PAR1+2))*PAR3),
+                    student_t_lcdf(OUTCOME - PAR4/2.0  | PAR1 + 2, PAR2, sqrt(PAR1/(PAR1+2))*PAR3)
+                ) -
+                //truncation: only responses between PAR5 and PAR6 were allowed
+                log_diff_exp(
+                    student_t_lcdf(PAR6 + PAR4/2.0  | PAR1 + 2, PAR2, sqrt(PAR1/(PAR1+2))*PAR3),
+                    student_t_lcdf(PAR5 - PAR4/2.0  | PAR1 + 2, PAR2, sqrt(PAR1/(PAR1+2))*PAR3)
+                );",
+            stan_dev = "dev = dev + (-2)*(
+                //interval censoring: responses were rounded to intervals of size PAR4
+                log_diff_exp(
+                    student_t_lcdf(OUTCOME + PAR4/2.0  | PAR1 + 2, PAR2, sqrt(PAR1/(PAR1+2))*PAR3),
+                    student_t_lcdf(OUTCOME - PAR4/2.0  | PAR1 + 2, PAR2, sqrt(PAR1/(PAR1+2))*PAR3)
+                ) -
+                //truncation: only responses between PAR5 and PAR6 were allowed
+                log_diff_exp(
+                    student_t_lcdf(PAR6 + PAR4/2.0  | PAR1 + 2, PAR2, sqrt(PAR1/(PAR1+2))*PAR3),
+                    student_t_lcdf(PAR5 - PAR4/2.0  | PAR1 + 2, PAR2, sqrt(PAR1/(PAR1+2))*PAR3)
+                ));",
+
             par_map = function(k,e,...) {
                 # get constraints and add <lower=0> for width, sigma, and nuprime
                 constr_list <- get( "constraints" , envir=e )
@@ -86,11 +109,6 @@
                     constr_list[[sigma_name]] <- "lower=0"
                     assign( "constraints" , constr_list , envir=e )
                 }
-
-                #derive nu and scale from nuprime and sigma
-                k[[1]] <- concat(nuprime_name, "+", 2)
-                k[[3]] <- concat("sqrt(", nuprime_name, "/(", nuprime_name, "+2))*", sigma_name)
-
                 return(k);
             }
         ))
